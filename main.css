@@ -26,6 +26,26 @@ body {
   font-size: 1rem;
 }
 
+.easy {
+  display: inline-block;
+  font-size: inherit;
+  padding: 0 0.5em;
+  margin-bottom: 0;
+  background-color: #8bc53f;
+  color: #fafafa;	
+}
+
+.titre-avec-icon {
+	display: flex;
+	align-items: center;
+}
+
+.icone {
+	width: 70px;
+	height: 70px;
+	margin-right: 10px;
+}
+
 h3 {
   display: inline-block;
   font-size: inherit;

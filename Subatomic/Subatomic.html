@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NaturalWalker - Subatomic</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&family=Monofett&display=swap" rel="stylesheet">     <link rel="stylesheet" href="../main.css">
+</head>
+<body>
+	<h6><a href="../index.html"><-- Home</a></h6>
+    <div class="typeme"><span class="text-secondary">Natural </span><span class="text-background">~ </span><span class="cursor">$ </span>cat Subatomic</div>
+       <section class="output">
+	<div class="titre-avec-icon">
+ 		<img src="Subatomic.png" alt="Subatomic-icon" class="icone">
+ 		<h1>Subatomic</h1>
+	</div>
+	<h3 class="medium">Medium</h3>
+	<h6><a href="https://app.hackthebox.com/sherlocks/Subatomic" target="_blank">https://app.hackthebox.com/sherlocks/Subatomic</a></h6>
+    
+	<h2>-- Scénario --</h2>
+	<p>Forela is in need of your assistance. They were informed by an employee that their Discord account had been used to send a message with a link to a file they suspect is malware. The message read: "Hi! I've been working on a new game I think you may be interested in it. It combines a number of games we like to play together, check it out!". The Forela user has tried to secure their Discord account, but somehow the messages keep being sent and they need your help to understand this malware and regain control of their account! Warning: This is a warning that this Sherlock includes software that is going to interact with your computer and files. This software has been intentionally included for educational purposes and is NOT intended to be executed or used otherwise. Always handle such files in isolated, controlled, and secure environments. One the Sherlock zip has been unzipped, you will find a DANGER.txt file. Please read this to proceed.</p>
+	</br></br>
+	<h2>-- Analysis --</h2>
+	<ul><li>Provided Files :</li>
+		<ul>
+			<li>DANGER.txt</li>
+			<li>malware.zip</li>
+		</ul>
+	</ul>
+	<ul>
+		<li>Useful tools :</li>
+		<ul>
+			<li>...</li>
+		</ul>
+	</ul>
+</br></br>
+<article>
+    <div>
+        <p></p>
+        <h4>
+            <mark style="background-color: #e90b10; color:white;">!! WARNING !! PLEASE EXERCISE EXTREME CAUTION !</mark>
+        </h4>
+        <p>
+            <mark style="background-color: #e90b10; color:white;">It is strongly recommended that you do NOT extract or execute the contents of this ZIP file unless you understand the risks involved. Running the sample in a controlled environment, for example Pwnbox or an isolated virtual machine.</mark>
+        </p>
+        <h3>TASK 1 - What is the Imphash of this malware installer ?</h3>
+        <p>Each file as a single and unique hash that can be used as a fingerprint to track down a specific sample.</p>
+        <p>To get the hash of the malware file, on Powershell :</p>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha512-7Z9J3l1+EYfeaPKcGXu3MS/7T+w19WtKQY/n+xzmw4hZhJ9tyYmcUS+4QqAlzhicE5LAfMQSF3iFTK9bQdTxXg==" crossorigin="anonymous" referrerPolicy="no-referrer"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" integrity="sha512-tN7Ec6zAFaVSG3TpNAKtk4DOHNpSwKHxxrsiw4GHKESGPs5njn/0sMCUMl2svV4wo4BK/rCP7juYz+zx+l6oeQ==" crossorigin="anonymous" referrerPolicy="no-referrer"/>
+        <pre>
+            <code class="language-PowerShell">PS &gt; Get-FileHash -Algorithm sha256 .\nsis-installer.exe
+
+Algorithm       Hash                                                            
+---------       ----                                                           
+SHA256          7A95214E7077D7324C0E8DC7D20F2A4E625BC0AC7E14B1446E37C47DFF7EEB5B</code>
+        </pre>
+        <p>We can now look for the hash on VT (<a href="https://www.virustotal.com/gui/file/7a95214e7077d7324c0e8dc7d20f2a4e625bc0ac7e14b1446e37c47dff7eeb5b/detection">VirusTotal</a>), the sample is indeed flag :</p>
+        <figure>
+            <a href="Untitled.png">
+                <img style="width:432px" src="Untitled.png"/>
+            </a>
+        </figure>
+        <p>To find the Impash of the sample, we can go in the “Details” section:</p>
+        <blockquote><em>Import hash</em> (or <em>imphash</em>) is a technique in which hash values are calculated based on the library/imported function (API) names and their particular order within the executable</blockquote>
+        <figure>
+            <a href="Untitled%201.png">
+                <img style="width:576px" src="Untitled%201.png"/>
+            </a>
+        </figure>
+        <ul class="toggle">
+
+                <details close="">
+                    <summary>Answer</summary>
+                    <p id="d7122bf7-ac42-41d8-92fd-b1fd04704a8a" class=""><em><strong>b34f154ec913d2d2c435cbd644e91687</strong></em></p>
+                </details>
+        </ul>
+        <p></p>
+        <h3>TASK 2 - The malware contains a digital signature. What is the program name specified in the SpcSpOpusInfo Data Structure ?</h3>
+        <blockquote><code>SpcSpOpusInfo is a data structure used in digital code-signing o provide supplementary information about the signed software. It contains a list  of tuples, each containing a program name and a URL for more infromation about the signer — <em>source VirusTotal</em></blockquote>
+	<p></p>
+	<p>We can find this information using the same section (Details) :</p>
+	<figure>
+		<a href="Untitled%202.png">
+			<img style="width:240px" src="Untitled%202.png"/>
+		</a>
+	</figure>
+	<ul class="toggle"><details close="">
+	<summary>Answer</summary>
+	<p><em><strong>Windows Update Assistant</strong></em></p></details></ul><p>
+</p><h3>TASK 3 - The malware uses a unique GUID during installation, what is this GUID?</h3><p>We can either use our own sandbox or a public sandbox like <a href="https://www.joesandbox.com">joe sandbox</a>, <a href="https://app.any.run">ANY.RUN</a>.</p><p>Because it is not a confidential file we can use a public sandbox, in this case ANY.RUN and either  upload our sample or look for an already uploaded sample with the same hash as ours.</p><p>In the <a href="https://app.any.run/tasks/5d675687-5711-4900-b5e9-13bc0c33c8b2/">ANY.RUN </a>page we can have a lot of informations about the behaviour of the malware. In our case we will only focus on the “Text Report”.</p><figure><a href="Untitled%203.png"><img style="width:708px" src="Untitled%203.png"/></a></figure><p>
+</p><p>To find the malware GUID during its installation, we scroll down to the <em><strong>Registry activity</strong></em> section:</p><figure><a href="Untitled%204.png"><img style="width:624px" src="Untitled%204.png"/></a></figure><ul class="toggle"><details close=""><summary>Answer</summary><p><em><strong>cfbc383d-9aa0-5771-9485-7b806e8442d5</strong></em></p><p id="c8eac7e9-093e-4365-b7ac-603d5640ff16" class="">
+</p></details></ul><p>
+</p><h3>TASK 4 - The malware contains a package.json file with metadata associated with it. What is the &#x27;License&#x27; tied to this malware? </h3><p>So we can right-click on the <em>nsis-installer.exe</em> and than extract.</p><figure><a href="Untitled%205.png"><img style="width:528px" src="Untitled%205.png"/></a></figure><figure><a href="Untitled%206.png"><img style="width:528px" src="Untitled%206.png"/></a></figure><p>We can also extract the <em>app-32.7z. </em></p><p>We see a lot of files in the main <em>app-32</em> folder, and looking at the ressources folder we see 2 files.</p><p>One of them is “app.asar” and because of that we can identify that this app is most likely a <strong>Electron App.</strong></p><figure><a href="Untitled%207.png"><img style="width:699px" src="Untitled%207.png"/></a></figure><p>To find the information about the “License” tied to this malware, open it with notepad for example :</p><figure><a href="Untitled%208.png"><img style="width:384px" src="Untitled%208.png"/></a></figure><ul class="toggle"><details close=""><summary>Answer</summary><p><em><strong>ISC</strong></em></p></details></ul><p>
+</p><h3>TASK 5 - The malware connects back to a C2 address during execution. What is the domain used for C2 ?</h3><ul><li style="list-style-type:disc">Using <a href="http://ANY.RUN">ANY.RUN</a>, in the DNS REQUEST we can look for a suspicious contacted Domain</li></ul><figure><a href="Untitled%209.png"><img style="width:1152px" src="Untitled%209.png"/></a></figure><ul class="toggle"><details close=""><summary>Answer</summary><p><em><strong>illitmagnetic.site</strong></em></p></details></ul><p>
+</p><h3>TASK 6 - The malware attempts to get the public IP address of an infected system. What is the full URL used to retrieve this information ?</h3><figure><a href="Untitled%2010.png"><img style="width:708px" src="Untitled%2010.png"/></a></figure><p>The full URL to retrieve that type of informations using this site is<em> /json </em>in a JSON format.</p><ul class="toggle"><details close=""><summary>Answer</summary><p><em><strong>https://ipinfo.io/json</strong></em></p></details></ul><p>
+</p><h3>WORK IN PROGRESS…</h3></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span>
+</body>
+</html>

@@ -35,6 +35,33 @@ body {
   color: #fafafa;	
 }
 
+.medium {
+  display: inline-block;
+  font-size: inherit;
+  padding: 0 0.5em;
+  margin-bottom: 0;
+  background-color: #faaf3a;
+  color: #fafafa;	
+}
+
+.hard {
+  display: inline-block;
+  font-size: inherit;
+  padding: 0 0.5em;
+  margin-bottom: 0;
+  background-color: #ff3e3e;
+  color: #fafafa;	
+}
+
+.insane {
+  display: inline-block;
+  font-size: inherit;
+  padding: 0 0.5em;
+  margin-bottom: 0;
+  background: linear-gradient(45deg, #ff0000, #ff00ff, #0000ff, #00ff00, #ffff00, #ff0000);
+  color: #fafafa;	
+}
+
 .titre-avec-icon {
 	display: flex;
 	align-items: center;

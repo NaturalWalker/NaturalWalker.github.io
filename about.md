@@ -29,7 +29,6 @@ Reach me on the links in the footer.
 
 Opinions are my own and not those of any employer. Content is provided as-is for
 research and educational purposes.
-
-    </div>
+</div>
   </article>
 </div>

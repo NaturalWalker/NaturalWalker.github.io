@@ -23,7 +23,7 @@ shared in defanged form.
 
 ## Contact
 
-Reach me on the links in the footer. For sensitive reports, ask for a PGP key first.
+Reach me on the links in the footer.
 
 ## Disclaimer
 

@@ -1,0 +1,21 @@
+---
+layout: default
+title: Blog
+section: blog
+permalink: /blog/
+---
+
+<div class="wrap">
+  <section class="page-head">
+    <p class="cmd"><span class="p">PS ></span> ls -lt ./blog</p>
+    <h1>Blog</h1>
+    <p>Malware reverse-engineering, cyber threat intelligence, and detection engineering.</p>
+  </section>
+  <div class="cards" style="margin-top:26px;">
+    {%- for post in site.posts -%}
+      {% include card.html post=post %}
+    {%- else -%}
+      <p class="desc">No posts yet.</p>
+    {%- endfor -%}
+  </div>
+</div>

@@ -1,0 +1,17 @@
+{%- comment -%} Reading progress bar for article pages. {%- endcomment -%}
+<div class="reading-progress" id="rprog" aria-hidden="true"></div>
+<script>
+(function(){
+  var bar = document.getElementById('rprog');
+  var art = document.querySelector('.article');
+  if(!bar || !art) return;
+  function upd(){
+    var total = art.offsetHeight - window.innerHeight;
+    var scrolled = Math.min(Math.max(-art.getBoundingClientRect().top, 0), Math.max(total, 1));
+    bar.style.width = (total > 0 ? (scrolled / total) * 100 : 0) + '%';
+  }
+  window.addEventListener('scroll', upd, { passive:true });
+  window.addEventListener('resize', upd);
+  upd();
+})();
+</script>

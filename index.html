@@ -1,0 +1,148 @@
+---
+layout: default
+title: null
+---
+{%- assign em = site.email -%}
+{%- if em == '' or em == nil -%}{%- assign em = 'you@example.com' -%}{%- endif -%}
+
+<!-- ============================ HOMEPAGE ============================ -->
+<section class="hero">
+  <div class="hero-bg"><img src="{{ site.hero | default: '/assets/images/hero.svg' | relative_url }}" alt=""></div>
+  {%- if site.hero_character -%}
+  <div class="idle" aria-hidden="true">
+    <div class="idle-bob"><div class="idle-tilt">
+      <img class="idle-img" src="{{ site.hero_character | relative_url }}" alt="">
+    </div></div>
+  </div>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <filter id="boil" x="-6%" y="-6%" width="112%" height="112%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="1" seed="2" result="n">
+        <animate attributeName="seed" values="2;6;11;15;2" dur="0.9s" repeatCount="indefinite" calcMode="discrete"/>
+      </feTurbulence>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="2.2" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </svg>
+  {%- endif -%}
+  <div class="wrap">
+    <div class="hero-inner">
+      <div class="hero-kicker"><span class="dot"></span>{{ site.status }} · defensive threat research</div>
+      <h1 class="hero-title">{{ site.title }}</h1>
+      <p class="hero-tag">{{ site.tagline }}</p>
+      <div class="hero-mission">
+        <div><strong>Reverse</strong> — take the sample apart before it reaches production.</div>
+        <div><strong>Detect</strong> — turn each finding into rules and IOCs defenders can ship.</div>
+        <div><strong>Share</strong> — the best control is an analyst who reads the evidence.</div>
+      </div>
+      <div class="cta-row">
+        <a class="cta" href="{{ '/blog/' | relative_url }}">cat posts.txt</a>
+        <a class="cta" href="#about">whoami</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="lab-section">
+  <div class="wrap">
+    <div class="shead">
+      <span class="shead-bar"></span><h2>Latest analysis</h2>
+      <span class="shead-count">{{ site.posts | size }}</span>
+      <a class="shead-link" href="{{ '/blog/' | relative_url }}">View all</a>
+    </div>
+    <div class="cards">
+      {%- for post in site.posts limit: 6 -%}
+        {% include card.html post=post %}
+      {%- else -%}
+        <p class="desc">No posts yet. Add a markdown file in <code>_posts/</code>.</p>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<section class="lab-section">
+  <div class="wrap">
+    <div class="shead">
+      <span class="shead-bar"></span><h2>CTF writeups</h2>
+      <span class="shead-count">{{ site.writeups | size }}</span>
+      <a class="shead-link" href="{{ '/writeups/' | relative_url }}">View all</a>
+    </div>
+    <div class="list">
+      {%- assign wus = site.writeups | sort: "date" | reverse -%}
+      {%- for post in wus limit: 5 -%}
+        {% include entry-writeup.html post=post %}
+      {%- else -%}
+        <article class="row"><div class="date">—</div><div class="body"><p class="desc">No writeups yet. Add a markdown file in <code>_writeups/</code>.</p></div></article>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<section class="lab-section" id="about">
+  <div class="wrap">
+    <div class="shead"><span class="shead-bar"></span><h2>About</h2></div>
+    <div class="about-grid">
+      <div class="about-copy">
+        <p>Independent defensive-security research. I take malware apart to understand how it actually behaves, then publish the analysis — indicators, detection rules, and the reasoning — so it's useful to whoever is on call.</p>
+        <p>Most defenses don't fail for lack of tooling. They fail because someone was looking straight at the evidence without knowing what they were seeing. Reach me at <a href="mailto:{{ em }}">{{ em }}</a>{% if site.github %} or on <a href="https://github.com/{{ site.github }}" rel="me noopener">GitHub</a>{% endif %}.</p>
+        <ul class="focus-list">
+          {%- for f in site.focus -%}<li>{{ f }}</li>{%- endfor -%}
+        </ul>
+      </div>
+
+      <div class="terminal">
+        <div class="term-bar">
+          <span class="term-dot" style="background:#4a4a4a"></span>
+          <span class="term-dot" style="background:#6e6e6e"></span>
+          <span class="term-dot" style="background:#9a9a9a"></span>
+          <span class="term-title">Windows PowerShell</span>
+        </div>
+        <div class="term-body">
+          <div class="term-boot">
+            <div class="term-line"><span class="pr">PS C:\Users\{{ site.user }}></span> Get-Help</div>
+            <div class="term-line muted">Interactive console — type a command and press [ENTER].</div>
+            <div class="term-line muted">available: help, whoami, posts, interests, clear</div>
+          </div>
+          <div id="term-out"></div>
+          <div class="term-input-line">
+            <span class="pr">PS></span>
+            <input class="term-input" id="term-in" autocomplete="off" spellcheck="false" aria-label="terminal input">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  var input = document.getElementById('term-in');
+  var out = document.getElementById('term-out');
+  if(!input || !out) return;
+  var user = {{ site.user | jsonify }};
+  var name = {{ site.title | jsonify }};
+  var status = {{ site.status | jsonify }};
+  var focus = {{ site.focus | jsonify }};
+  var posts = [ {% for p in site.posts limit:5 %}{"t":{{ p.title | jsonify }},"u":{{ p.url | relative_url | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %} ];
+  function esc(s){ var d=document.createElement('div'); d.textContent=String(s); return d.innerHTML; }
+  function line(html,cls){ var d=document.createElement('div'); d.className='term-line'+(cls?' '+cls:''); d.innerHTML=html; out.appendChild(d); }
+  function run(cmd){
+    line('<span class="pr">PS></span> '+esc(cmd));
+    var c = cmd.trim().toLowerCase();
+    if(c===''){ return; }
+    else if(c==='help'){ line('commands: help, whoami, posts, interests, clear'); }
+    else if(c==='whoami' || c==='whoami /all'){
+      line('<span class="k">name</span>   : '+esc(name));
+      line('<span class="k">focus</span>  : '+esc(focus.join(', ')));
+      line('<span class="k">status</span> : <span class="ok">'+esc(status)+'</span>');
+    }
+    else if(c==='about'){ line('Defensive threat research — malware taken apart, then published as analysis, IOCs and detections.'); }
+    else if(c==='posts'){ if(posts.length===0){ line('no posts yet.'); } else { posts.forEach(function(p){ line('- <a href="'+p.u+'">'+esc(p.t)+'</a>'); }); } }
+    else if(c==='interests' || c==='focus'){ focus.forEach(function(f){ line('&#10095; '+esc(f)); }); }
+    else if(c==='clear'){ out.innerHTML=''; }
+    else { line('<span class="muted">\''+esc(c)+'\' is not recognized. type </span><span class="ok">help</span><span class="muted">.</span>'); }
+  }
+  input.addEventListener('keydown', function(e){
+    if(e.key==='Enter'){ run(input.value); input.value=''; var b=out.parentNode; b.scrollTop=b.scrollHeight; }
+  });
+})();
+</script>
+

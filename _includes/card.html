@@ -1,0 +1,15 @@
+{%- comment -%} Blog card with cover image. Usage: {% include card.html post=item %} {%- endcomment -%}
+{%- assign words = include.post.content | number_of_words -%}
+{%- assign rt = words | divided_by: 200 | plus: 1 -%}
+{%- assign cover = include.post.image | default: '/assets/images/cover-default.svg' -%}
+<a class="pcard" href="{{ include.post.url | relative_url }}">
+  <div class="pcard-thumb"><img src="{{ cover | relative_url }}" alt="" loading="lazy"></div>
+  <div class="pcard-body">
+    <div class="pcard-meta">{{ include.post.date | date: "%d %b, %Y" }} · {{ rt }} min read{% if include.post.category %} · {{ include.post.category }}{% endif %}</div>
+    <h3 class="pcard-title">{{ include.post.title }}</h3>
+    {%- if include.post.description -%}<p class="pcard-desc">{{ include.post.description }}</p>{%- endif -%}
+    <div class="pcard-tags">
+      {%- for t in include.post.tags limit: 3 -%}<span class="chip">{{ t }}</span>{%- endfor -%}
+    </div>
+  </div>
+</a>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-label="cover">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#151515"/><stop offset="100%" stop-color="#080808"/></linearGradient>
+    <pattern id="p" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" fill="none" stroke="#232323" stroke-width="1"/></pattern>
+  </defs>
+  <rect width="640" height="360" fill="url(#g)"/>
+  <rect width="640" height="360" fill="url(#p)" opacity="0.6"/>
+  <circle cx="512" cy="96" r="150" fill="#ffffff" opacity="0.05"/>
+  <text x="40" y="150" font-family="ui-monospace, monospace" font-size="120" font-weight="700" fill="#ffffff" opacity="0.14">//</text>
+  <rect x="40" y="250" width="46" height="3" fill="#ffffff"/>
+  <text x="40" y="290" font-family="ui-monospace, monospace" font-size="20" fill="#d8d8d8">threat-intel.md</text>
+</svg>

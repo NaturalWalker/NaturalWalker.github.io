@@ -1,0 +1,45 @@
+{%- comment -%} Sticky sidebar TOC + clickable heading anchors, from h2/h3. {%- endcomment -%}
+<aside class="toc" id="toc" aria-label="Table of contents">
+  <div class="toc-title">On this page</div>
+  <nav id="toc-nav"></nav>
+</aside>
+<script>
+(function(){
+  var prose = document.querySelector('.prose');
+  var toc = document.getElementById('toc');
+  var nav = document.getElementById('toc-nav');
+  if(!prose) return;
+  var heads = prose.querySelectorAll('h2, h3');
+  if(heads.length < 2){ if(toc) toc.style.display='none'; }
+  var ul = nav ? document.createElement('ul') : null;
+  var links = [];
+  heads.forEach(function(h){
+    if(!h.id){ h.id = h.textContent.trim().toLowerCase().replace(/[^\w]+/g,'-').replace(/(^-|-$)/g,''); }
+    var an = document.createElement('a');
+    an.className = 'anchor'; an.href = '#' + h.id; an.textContent = '#'; an.setAttribute('aria-hidden','true');
+    h.appendChild(an);
+    if(ul){
+      var li = document.createElement('li');
+      li.className = (h.tagName === 'H3') ? 'lvl3' : 'lvl2';
+      var a = document.createElement('a');
+      a.href = '#' + h.id; a.textContent = h.textContent.replace(/#$/,'');
+      li.appendChild(a); ul.appendChild(li); links.push(a);
+    }
+  });
+  if(ul && links.length >= 2){
+    nav.appendChild(ul);
+    var map = {}; links.forEach(function(a){ map[a.getAttribute('href').slice(1)] = a; });
+    if('IntersectionObserver' in window){
+      var obs = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if(e.isIntersecting){
+            links.forEach(function(a){ a.classList.remove('active'); });
+            var a = map[e.target.id]; if(a) a.classList.add('active');
+          }
+        });
+      }, { rootMargin: '-12% 0px -78% 0px', threshold: 0 });
+      heads.forEach(function(h){ obs.observe(h); });
+    }
+  }
+})();
+</script>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if page.title %}{{ page.title }} — {{ site.title }}{% else %}{{ site.title }} — {{ site.tagline }}{% endif %}</title>
+
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ '/assets/images/favicon-16.png' | relative_url }}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ '/assets/images/favicon-32.png' | relative_url }}">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ '/assets/images/favicon-180.png' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/labs.css' | relative_url }}">
+
+  {% feed_meta %}
+  {% seo title=false %}
+</head>
+<body>
+
+  <header class="site-head">
+    <div class="wrap">
+      <a class="brand" href="{{ '/' | relative_url }}" data-text="{{ site.title }}">{{ site.title }}</a>
+      <nav class="nav" aria-label="Primary">
+        <a href="{{ '/blog/'     | relative_url }}" class="{% if page.section == 'blog' %}active{% endif %}">Blog</a>
+        <a href="{{ '/writeups/' | relative_url }}" class="{% if page.section == 'writeups' %}active{% endif %}">Writeups</a>
+        <a href="{{ '/about/'    | relative_url }}" class="{% if page.section == 'about' %}active{% endif %}">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    {{ content }}
+  </main>
+
+  <footer class="site-foot">
+    <div class="wrap">
+      <div>
+        <div class="foot-brand">{{ site.title }}</div>
+        <div class="foot-tag">{{ site.tagline }}</div>
+      </div>
+      <span class="links">
+        {% if site.github %}<a href="https://github.com/{{ site.github }}" rel="me noopener">GitHub</a>{% endif %}
+        {% if site.mastodon %}<a href="{{ site.mastodon }}" rel="me noopener">Mastodon</a>{% endif %}
+        {% if site.email %}<a href="mailto:{{ site.email }}">Email</a>{% endif %}
+        <a href="{{ '/feed.xml' | relative_url }}">RSS</a>
+      </span>
+    </div>
+  </footer>
+
+</body>
+</html>

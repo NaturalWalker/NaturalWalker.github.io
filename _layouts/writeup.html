@@ -1,0 +1,32 @@
+---
+layout: default
+---
+{%- assign d = page.difficulty | downcase -%}
+{%- case d -%}
+  {%- when 'easy' -%}{% assign dc = 'diff-easy' %}
+  {%- when 'medium' -%}{% assign dc = 'diff-medium' %}
+  {%- when 'hard' -%}{% assign dc = 'diff-hard' %}
+  {%- when 'insane' -%}{% assign dc = 'diff-insane' %}
+  {%- else -%}{% assign dc = 'diff-medium' %}
+{%- endcase -%}
+{% include progress.html %}
+<div class="wrap">
+  <div class="doc-grid">
+    <article class="article">
+      <div class="crumbs"><a href="{{ '/' | relative_url }}">~</a><span class="sep">/</span><a href="{{ '/writeups/' | relative_url }}">writeups</a></div>
+      <div class="article-head wt-head">
+        <div class="pills">
+          {%- if page.category -%}<span class="pill">{{ page.category }}</span>{%- endif -%}
+          {%- if page.difficulty -%}<span class="pill diff {{ dc }}">{{ page.difficulty }}</span>{%- endif -%}
+          {%- if page.points -%}<span class="pill">{{ page.points }} pts</span>{%- endif -%}
+        </div>
+        <h1>{{ page.title }}</h1>
+        <div class="wt-sub">{% if page.event %}{{ page.event }}{% endif %}{% if page.platform %} · {{ page.platform }}{% endif %} · {{ page.date | date: "%d %b, %Y" }}</div>
+      </div>
+      <div class="prose">
+        {{ content }}
+      </div>
+    </article>
+    {% include toc.html %}
+  </div>
+</div>

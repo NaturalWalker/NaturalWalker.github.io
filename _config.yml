@@ -1,0 +1,52 @@
+# Identity
+title:    "Natural"
+tagline:  "Malware analysis, threat intel & CTF notes"
+intro:    "Malware analysis, Cyber Threat Intelligence, and CTF writeups."
+author:   "your name"
+
+# homepage hero / console fields
+user:   "analyst"                        # shown in the PowerShell prompt
+status: "AVAILABLE"                      # whoami status line
+focus:  ["Malware Reversing", "Threat Hunting", "CTI", "Incident Response", "OSINT"]
+avatar: "/assets/images/avatar.png"      # profile image in the terminal box
+banner: "/assets/images/banner.svg"      # banner strip in the terminal box
+hero:   "/assets/images/hero.svg"        # full-width banner on the homepage
+hero_character: "/assets/images/character.png"  # animated character in the hero (blank to disable)
+
+description: "Malware analysis, Cyber Threat Intelligence, and CTF writeups."
+url:     "https://naturalwalker.github.io"
+baseurl: ""                              # "/repo" for a project site
+
+# Social (blank = hidden)
+github:   "naturalwalker"
+twitter: ""
+
+# Build 
+permalink: /blog/:title/
+timezone: Europe/Paris
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+collections:
+  writeups:
+    output: true
+    permalink: /writeups/:name/
+
+defaults:
+  - scope: { path: "", type: "posts" }
+    values: { layout: "post" }
+  - scope: { path: "", type: "writeups" }
+    values: { layout: "writeup" }
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor

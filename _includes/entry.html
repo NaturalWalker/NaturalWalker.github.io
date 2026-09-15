@@ -1,0 +1,14 @@
+{%- comment -%} Blog row. Usage: {% include entry.html post=item %} {%- endcomment -%}
+{%- assign words = include.post.content | number_of_words -%}
+{%- assign rt = words | divided_by: 200 | plus: 1 -%}
+<article class="row">
+  <div class="date">{{ include.post.date | date: "%d %b, %Y" }}</div>
+  <div class="body">
+    <a class="title" href="{{ include.post.url | relative_url }}">{{ include.post.title }}</a>
+    {%- if include.post.description -%}<p class="desc">{{ include.post.description }}</p>{%- endif -%}
+    <div class="meta">
+      <span class="info">{% if include.post.category %}{{ include.post.category }} · {% endif %}{{ rt }} min read</span>
+      {%- for t in include.post.tags limit: 4 -%}<span class="chip">{{ t }}</span>{%- endfor -%}
+    </div>
+  </div>
+</article>

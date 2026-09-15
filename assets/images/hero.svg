@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 460" preserveAspectRatio="xMidYMid slice" role="img" aria-label="banner">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#161616"/><stop offset="55%" stop-color="#0b0b0b"/><stop offset="100%" stop-color="#121212"/></linearGradient>
+    <radialGradient id="glow" cx="82%" cy="8%" r="60%"><stop offset="0%" stop-color="#ffffff" stop-opacity="0.10"/><stop offset="100%" stop-color="#ffffff" stop-opacity="0"/></radialGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="#202020" stroke-width="1"/></pattern>
+  </defs>
+  <rect width="1600" height="460" fill="url(#bg)"/>
+  <rect width="1600" height="460" fill="url(#grid)" opacity="0.55"/>
+  <rect width="1600" height="460" fill="url(#glow)"/>
+  <polyline points="0,330 180,330 210,300 250,360 300,300 340,340 380,300 430,330 1600,330" fill="none" stroke="#ffffff" stroke-width="1.5" opacity="0.22"/>
+  <polyline points="0,372 520,372 560,352 600,392 640,352 700,372 1600,372" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.10"/>
+  <rect x="0" y="418" width="1600" height="1" fill="#ffffff" opacity="0.20"/>
+  <text x="1440" y="120" text-anchor="end" font-family="ui-monospace, monospace" font-size="150" font-weight="700" fill="#ffffff" opacity="0.05">&gt;_</text>
+</svg>

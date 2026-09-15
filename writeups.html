@@ -1,0 +1,21 @@
+---
+layout: default
+title: Writeups
+section: writeups
+permalink: /writeups/
+---
+
+<div class="wrap">
+  <section class="page-head">
+    <h1>Writeups</h1>
+    <p>CTF challenge solutions and post-competition notes. Kept separate from the research blog on purpose.</p>
+  </section>
+  <div class="list" style="margin-top:20px;">
+    {%- assign wus = site.writeups | sort: "date" | reverse -%}
+    {%- for post in wus -%}
+      {% include entry-writeup.html post=post %}
+    {%- else -%}
+      <article class="row"><div class="date">—</div><div class="body"><p class="desc">No writeups yet.</p></div></article>
+    {%- endfor -%}
+  </div>
+</div>

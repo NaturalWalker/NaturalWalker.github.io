@@ -82,7 +82,7 @@ title: null
     <div class="shead"><span class="shead-bar"></span><h2>About</h2></div>
     <div class="about-grid">
       <div class="about-copy">
-        <p>Independent defensive-security research. I take malware apart to understand how it actually behaves, then publish the analysis — indicators, detection rules, and the reasoning — so it's useful to whoever is on call.</p>
+        <p>Independent defensive-security research. I take malware apart to understand how it actually behaves, then publish the analysis indicators, detection rules, and the reasoning so it's useful to whoever is on call.</p>
         <p>Most defenses don't fail for lack of tooling. They fail because someone was looking straight at the evidence without knowing what they were seeing. Reach me on Twitter</p>
         <ul class="focus-list">
           {%- for f in site.focus -%}<li>{{ f }}</li>{%- endfor -%}
@@ -99,7 +99,7 @@ title: null
         <div class="term-body">
           <div class="term-boot">
             <div class="term-line"><span class="pr">PS C:\Users\{{ site.user }}></span> Get-Help</div>
-            <div class="term-line muted">Interactive console — type a command and press [ENTER].</div>
+            <div class="term-line muted">Interactive console type a command and press [ENTER].</div>
             <div class="term-line muted">available: help, whoami, posts, interests, clear</div>
           </div>
           <div id="term-out"></div>
@@ -135,7 +135,7 @@ title: null
       line('<span class="k">focus</span>  : '+esc(focus.join(', ')));
       line('<span class="k">status</span> : <span class="ok">'+esc(status)+'</span>');
     }
-    else if(c==='about'){ line('Defensive threat research — malware taken apart, then published as analysis, IOCs and detections.'); }
+    else if(c==='about'){ line('Defensive threat research malware taken apart, then published as analysis, IOCs and detections.'); }
     else if(c==='posts'){ if(posts.length===0){ line('no posts yet.'); } else { posts.forEach(function(p){ line('- <a href="'+p.u+'">'+esc(p.t)+'</a>'); }); } }
     else if(c==='interests' || c==='focus'){ focus.forEach(function(f){ line('&#10095; '+esc(f)); }); }
     else if(c==='clear'){ out.innerHTML=''; }

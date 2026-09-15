@@ -8,7 +8,7 @@ permalink: /about/
 <div class="wrap">
   <article class="article">
     <div class="article-head"><h1>About</h1></div>
-    <div class="prose">
+    <div class="prose" markdown="1">
 
 I'm a defensive security researcher focused on malware analysis and cyber threat
 intelligence. This site keeps two things deliberately separate:
